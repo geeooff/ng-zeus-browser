@@ -12,6 +12,7 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <AssemblyName>ZeusBrowser.Server</AssemblyName>
     <RootNamespace>ZeusBrowser.Server</RootNamespace>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>33d35b13-a8b5-42d3-b888-6e37596dd171</UserSecretsId>
   </PropertyGroup>
 
