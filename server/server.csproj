@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -12,6 +12,7 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <AssemblyName>ZeusBrowser.Server</AssemblyName>
     <RootNamespace>ZeusBrowser.Server</RootNamespace>
+    <UserSecretsId>33d35b13-a8b5-42d3-b888-6e37596dd171</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
