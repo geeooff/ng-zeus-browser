@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace app.Pages
+namespace ZeusBrowser.Server.Pages
 {
     public class ErrorModel : PageModel
     {
