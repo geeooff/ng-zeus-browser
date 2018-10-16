@@ -13,49 +13,49 @@ using System;
 
 namespace ZeusBrowser.Server
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
 			// app services
 			services.AddZeusBrowser(Configuration.GetSection("ZeusBrowser"));
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "../client/dist";
-            });
+			// In production, the Angular files will be served from this directory
+			services.AddSpaStaticFiles(configuration =>
+			{
+				configuration.RootPath = "../client/dist";
+			});
 
 			// XSRF protection
 			services.AddAntiforgery(options => options.HeaderName = Core.Defaults.AntiforgeryHeaderName);
 		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Error");
+				app.UseHsts();
+			}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
+			app.UseSpaStaticFiles();
 
 			// XSRF protection
 			app.Use(next => context =>
@@ -79,25 +79,25 @@ namespace ZeusBrowser.Server
 				return next(context);
 			});
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller}/{action=Index}/{id?}");
+			});
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+			app.UseSpa(spa =>
+			{
+				// To learn more about options for serving an Angular SPA from ASP.NET Core,
+				// see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "../client";
+				spa.Options.SourcePath = "../client";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
-        }
-    }
+				if (env.IsDevelopment())
+				{
+					spa.UseAngularCliServer(npmScript: "start");
+				}
+			});
+		}
+	}
 }
