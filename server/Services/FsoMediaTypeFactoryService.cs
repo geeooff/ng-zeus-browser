@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoMediaTypeFactoryService
+	public class FsoMediaTypeFactoryService : IFsoMediaTypeFactoryService
 	{
 		private readonly ILogger<FsoMediaTypeFactoryService> _logger;
 		private readonly Dictionary<string, Tuple<MediaTypeType, string, string>> _cache;

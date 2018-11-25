@@ -12,14 +12,14 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoPlaylistService
+	public class FsoPlaylistService : IFsoPlaylistService
 	{
 		private readonly ILogger<FsoPlaylistService> _logger;
-		private readonly FsoUriService _uriService;
+		private readonly IFsoUriService _uriService;
 
 		public FsoPlaylistService(
 			ILogger<FsoPlaylistService> logger,
-			FsoUriService uriService)
+			IFsoUriService uriService)
 		{
 			_logger = logger;
 			_uriService = uriService;

@@ -32,33 +32,33 @@ namespace ZeusBrowser.Server.Core
 
 			// media type builder service
 			// role: resolve media types from file system objects
-			services.AddSingleton<FsoMediaTypeFactoryService>();
+			services.AddSingleton<IFsoMediaTypeFactoryService, FsoMediaTypeFactoryService>();
 
 			// file system object uri service
 			// role: helper class that handles file system uris
-			services.AddSingleton<FsoUriService>();
+			services.AddSingleton<IFsoUriService, FsoUriService>();
 
 			// file system object builder service
 			// role: creates instances of file system objects
-			services.AddSingleton<FsoFactoryService>();
+			services.AddSingleton<IFsoFactoryService, FsoFactoryService>();
 
 			// file system object cache service
 			// role: retrieve and store file system objects in-memory
 			services.AddMemoryCache();
-			services.AddSingleton<FsoCacheService>();
+			services.AddSingleton<IFsoCacheService, FsoCacheService>();
 
 			// playlist service
 			// role: generates playlist files from fsos
-			services.AddSingleton<FsoPlaylistService>();
+			services.AddSingleton<IFsoPlaylistService, FsoPlaylistService>();
 
 			// mediainfo service
 			// role: get media informations from mediainfo executable
-			services.AddSingleton<FsoMediaInfoService>();
+			services.AddSingleton<IFsoMediaInfoService, FsoMediaInfoService>();
 
 			// file system object repository
 			// role: interrogates cache or factory to retrieve file system objects corresponding to http context
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-			services.AddScoped<FsoRepositoryService>();
+			services.AddScoped<IFsoRepositoryService, FsoRepositoryService>();
 
 			return services;
 		}

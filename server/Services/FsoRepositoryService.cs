@@ -12,22 +12,22 @@ using Microsoft.AspNetCore.Http.Headers;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoRepositoryService
+	public class FsoRepositoryService : IFsoRepositoryService
 	{
 		private readonly ILogger<FsoRepositoryService> _logger;
 		private readonly AppSettings _options;
-		private readonly FsoUriService _uriService;
-		private readonly FsoCacheService _cacheService;
-		private readonly FsoFactoryService _factoryService;
+		private readonly IFsoUriService _uriService;
+		private readonly IFsoCacheService _cacheService;
+		private readonly IFsoFactoryService _factoryService;
 		private readonly HttpContext _httpContext;
 		private readonly RequestHeaders _requestHeaders;
 
 		public FsoRepositoryService(
 			ILogger<FsoRepositoryService> logger,
 			IOptions<AppSettings> optionsAccessor,
-			FsoUriService uriService,
-			FsoCacheService cacheService,
-			FsoFactoryService factoryService,
+			IFsoUriService uriService,
+			IFsoCacheService cacheService,
+			IFsoFactoryService factoryService,
 			IHttpContextAccessor httpContextAccessor)
 		{
 			_logger = logger;
@@ -194,7 +194,7 @@ namespace ZeusBrowser.Server.Services
 		}
 
 		// Need serious refactoring...
-		private IEnumerable<Fso> GetDescendantsRecursive(Fso fso, GroupBy groupBy, OrderBy orderBy)
+		public IEnumerable<Fso> GetDescendantsRecursive(Fso fso, GroupBy groupBy, OrderBy orderBy)
 		{
 			if (fso.IsDir)
 			{

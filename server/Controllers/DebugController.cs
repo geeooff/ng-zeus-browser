@@ -13,24 +13,24 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Controllers
 {
-    [Route("api/debug")]
+	[Route("api/debug")]
 	[ApiController]
 	public class DebugController : Controller
-    {
+	{
 		private readonly ILogger<DebugController> _logger;
 		private readonly AppSettings _options;
 		private readonly MediaTypes _mediaTypesOptions;
-		private readonly FsoUriService _uriService;
-		private readonly FsoRepositoryService _repositoryService;
-		private readonly FsoPlaylistService _playlistService;
+		private readonly IFsoUriService _uriService;
+		private readonly IFsoRepositoryService _repositoryService;
+		private readonly IFsoPlaylistService _playlistService;
 
 		public DebugController(
 			ILogger<DebugController> logger,
 			IOptions<AppSettings> optionsAccessor,
 			IOptions<MediaTypes> mediaTypesOptionsAccessor,
-			FsoUriService uriService,
-			FsoRepositoryService repositoryService,
-			FsoPlaylistService playlistService)
+			IFsoUriService uriService,
+			IFsoRepositoryService repositoryService,
+			IFsoPlaylistService playlistService)
 		{
 			_logger = logger;
 			_options = optionsAccessor.Value;
@@ -40,9 +40,9 @@ namespace ZeusBrowser.Server.Controllers
 			_playlistService = playlistService;
 		}
 
-        [HttpGet()]
-        public IActionResult Config()
-        {
+		[HttpGet()]
+		public IActionResult Config()
+		{
 			return Ok(
 				new
 				{
@@ -50,7 +50,7 @@ namespace ZeusBrowser.Server.Controllers
 					mediaTypes = _mediaTypesOptions
 				}
 			);
-        }
+		}
 
 		[HttpGet("{bda}/{*path}")]
 		public IActionResult Builder(string path, BuilderDebugActions bda = BuilderDebugActions.GetChain, MediaTypeType? mt = null, GroupBy gb = Defaults.GroupBy, OrderBy ob = Defaults.OrderBy)
@@ -140,6 +140,6 @@ namespace ZeusBrowser.Server.Controllers
 			GetM3U,
 			GetASX
 		}
-    }
+	}
 }
 #endif

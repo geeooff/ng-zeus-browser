@@ -13,7 +13,7 @@ using ZeusBrowser.Server.Models;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoMediaInfoService
+	public class FsoMediaInfoService : IFsoMediaInfoService
 	{
 		private readonly ILogger<FsoMediaInfoService> _logger;
 		private readonly AppSettings _options;

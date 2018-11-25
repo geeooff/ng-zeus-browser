@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoUriService
+	public class FsoUriService : IFsoUriService
 	{
 		public const string Scheme = Defaults.InternalUriScheme;
 		public const string Host = Defaults.InternetUriHost;
@@ -211,12 +211,12 @@ namespace ZeusBrowser.Server.Services
 			}
 		}
 
-		private Uri GetRelativeInternalUri(Uri uri)
+		public Uri GetRelativeInternalUri(Uri uri)
 		{
 			return _rootInternalUri.MakeRelativeUri(uri);
 		}
 
-		internal void ValidateUri(Uri uri, string paramName)
+		public void ValidateUri(Uri uri, string paramName)
 		{
 			if (uri == null)
 				throw new ArgumentNullException(paramName, "Specified URI is null");

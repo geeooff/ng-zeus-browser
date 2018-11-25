@@ -12,18 +12,18 @@ using ZeusBrowser.Server.Models.Browse;
 
 namespace ZeusBrowser.Server.Controllers
 {
-    [Route("api/browse")]
-    [ApiController]
-    public class BrowseController : ControllerBase
-    {
+	[Route("api/browse")]
+	[ApiController]
+	public class BrowseController : ControllerBase
+	{
 		private readonly ILogger<BrowseController> _logger;
-		private readonly FsoUriService _uriService;
-		private readonly FsoRepositoryService _repositoryService;
+		private readonly IFsoUriService _uriService;
+		private readonly IFsoRepositoryService _repositoryService;
 
 		public BrowseController(
 			ILogger<BrowseController> logger,
-			FsoUriService uriService,
-			FsoRepositoryService repositoryService)
+			IFsoUriService uriService,
+			IFsoRepositoryService repositoryService)
 		{
 			_logger = logger;
 			_uriService = uriService;

@@ -12,20 +12,20 @@ using Microsoft.Extensions.FileProviders;
 
 namespace ZeusBrowser.Server.Services
 {
-	public class FsoFactoryService
+	public class FsoFactoryService : IFsoFactoryService
 	{
 		private readonly ILogger<FsoFactoryService> _logger;
 		private readonly AppSettings _options;
 		private readonly IFileProvider _fileProvider;
-		private readonly FsoUriService _uriService;
-		private readonly FsoMediaTypeFactoryService _mediaTypeFactoryService;
+		private readonly IFsoUriService _uriService;
+		private readonly IFsoMediaTypeFactoryService _mediaTypeFactoryService;
 
 		public FsoFactoryService(
 			ILogger<FsoFactoryService> logger,
 			IOptions<AppSettings> optionsAccessor,
 			IFileProvider fileProvider,
-			FsoUriService uriService,
-			FsoMediaTypeFactoryService mediaTypeFactoryService)
+			IFsoUriService uriService,
+			IFsoMediaTypeFactoryService mediaTypeFactoryService)
 		{
 			_logger = logger;
 			_options = optionsAccessor.Value;

@@ -15,12 +15,12 @@ namespace ZeusBrowser.Server.Services
 	/// <summary>
 	/// <see cref="Fso"/> in-memory cache service
 	/// </summary>
-	public class FsoCacheService
+	public class FsoCacheService : IFsoCacheService
 	{
 		private readonly ILogger<FsoCacheService> _logger;
 		private readonly AppSettings _options;
 		private readonly IMemoryCache _cache;
-		private readonly FsoUriService _uriService;
+		private readonly IFsoUriService _uriService;
 
 		/// <summary>
 		/// Creates an in-memory cache service instance
@@ -30,7 +30,7 @@ namespace ZeusBrowser.Server.Services
 			ILogger<FsoCacheService> logger,
 			IOptions<AppSettings> appOptionsAccessor,
 			IMemoryCache cache,
-			FsoUriService uriService)
+			IFsoUriService uriService)
 		{
 			_logger = logger;
 			_options = appOptionsAccessor.Value;
