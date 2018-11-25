@@ -14,8 +14,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Services
 {
-    public class FsoUriService
-    {
+	public class FsoUriService
+	{
 		public const string Scheme = Defaults.InternalUriScheme;
 		public const string Host = Defaults.InternetUriHost;
 

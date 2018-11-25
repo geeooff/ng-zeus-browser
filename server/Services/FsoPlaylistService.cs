@@ -12,8 +12,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ZeusBrowser.Server.Services
 {
-    public class FsoPlaylistService
-    {
+	public class FsoPlaylistService
+	{
 		private readonly ILogger<FsoPlaylistService> _logger;
 		private readonly FsoUriService _uriService;
 

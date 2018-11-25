@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Http.Headers;
 
 namespace ZeusBrowser.Server.Services
 {
-    public class FsoRepositoryService
-    {
+	public class FsoRepositoryService
+	{
 		private readonly ILogger<FsoRepositoryService> _logger;
 		private readonly AppSettings _options;
 		private readonly FsoUriService _uriService;
