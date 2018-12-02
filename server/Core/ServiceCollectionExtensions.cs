@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Options;
+using System.IO;
 
 namespace ZeusBrowser.Server.Core
 {
@@ -22,11 +23,23 @@ namespace ZeusBrowser.Server.Core
 			services.Configure<MediaTypes>(configuration.GetSection(nameof(MediaTypes)));
 
 			// app physical file provider, based on configured root path
-			services.AddSingleton<IFileProvider>(serviceProvider => {
+			services.AddSingleton<IFileProvider>(serviceProvider =>
+			{
 				var appSettingsAccessor = serviceProvider.GetService<IOptions<AppSettings>>();
 				return new PhysicalFileProvider(
 					appSettingsAccessor.Value.PhysicalPath,
 					ExclusionFilters.Sensitive
+				);
+			});
+
+			// root file info, required by some services who need to access unavailable data of the file provider
+			services.AddSingleton<IRootFileInfo>(serviceProvider =>
+			{
+				var appSettingsAccessor = serviceProvider.GetService<IOptions<AppSettings>>();
+				return new RootFileInfo(
+					new PhysicalDirectoryInfo(
+						new DirectoryInfo(appSettingsAccessor.Value.PhysicalPath)
+					)
 				);
 			});
 

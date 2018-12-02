@@ -30,7 +30,7 @@ namespace ZeusBrowser.Server.Services
 		{
 			string mediaInfoArgs = string.Format(
 				"\"{0}\" --Output={1}",
-				fso.FileSystemInfo.FullName,
+				fso.FileInfo.PhysicalPath,
 				output.ToString().ToUpper()
 			);
 

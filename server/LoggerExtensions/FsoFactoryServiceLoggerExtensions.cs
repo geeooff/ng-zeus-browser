@@ -9,7 +9,7 @@ using ZeusBrowser.Server.Models;
 
 namespace ZeusBrowser.Server.LoggerExtensions
 {
-    public static class FsoFactoryServiceLoggerExtensions
+	public static class FsoFactoryServiceLoggerExtensions
 	{
 		public static class LoggingEvents
 		{
@@ -45,12 +45,12 @@ namespace ZeusBrowser.Server.LoggerExtensions
 
 		public static void RootCreated(this ILogger<FsoFactoryService> logger, Fso fso)
 		{
-			_rootCreated(logger, fso.Name, fso.FileSystemInfo.FullName, fso.Uri.LocalPath, null);
+			_rootCreated(logger, fso.Name, fso.FileInfo.PhysicalPath, fso.Uri.LocalPath, null);
 		}
 
 		public static void ChildCreated(this ILogger<FsoFactoryService> logger, Fso fso)
 		{
-			_childCreated(logger, fso.Name, fso.FileSystemInfo.FullName, fso.Uri.LocalPath, null);
+			_childCreated(logger, fso.Name, fso.FileInfo.PhysicalPath, fso.Uri.LocalPath, null);
 		}
 
 		public static void UnknownFileSystemInfo(this ILogger<FsoFactoryService> logger, string name, string physicalPath, Exception ex)

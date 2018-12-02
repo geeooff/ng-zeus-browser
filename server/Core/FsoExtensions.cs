@@ -6,8 +6,8 @@ using ZeusBrowser.Server.Models;
 
 namespace ZeusBrowser.Server.Core
 {
-    public static class FsoExtensions
-    {
+	public static class FsoExtensions
+	{
 		public static readonly Dictionary<MediaTypeType, int> MediaTypeRanks = new Dictionary<MediaTypeType, int>
 		{
 			{ MediaTypeType.Video, 0 },
@@ -41,8 +41,9 @@ namespace ZeusBrowser.Server.Core
 				case OrderBy.NameDesc: return groupedObjects.ThenByDescending(obj => obj.Name, StringComparer.CurrentCulture);
 				case OrderBy.MediaType: return groupedObjects.ThenBy(obj => GetMediaTypeRank(obj.MediaType.Type));
 				case OrderBy.MediaTypeDesc: return groupedObjects.ThenByDescending(obj => GetMediaTypeRank(obj.MediaType.Type));
-				case OrderBy.Created: return groupedObjects.ThenBy(obj => obj.Created);
-				case OrderBy.CreatedDesc: return groupedObjects.ThenByDescending(obj => obj.Created);
+				// Creation date is not exposed by IFileInfo or IFileProvider
+				//case OrderBy.Created: return groupedObjects.ThenBy(obj => obj.Created);
+				//case OrderBy.CreatedDesc: return groupedObjects.ThenByDescending(obj => obj.Created);
 				case OrderBy.Modified: return groupedObjects.ThenBy(obj => obj.Modified);
 				case OrderBy.ModifiedDesc: return groupedObjects.ThenByDescending(obj => obj.Modified);
 
@@ -63,5 +64,5 @@ namespace ZeusBrowser.Server.Core
 		{
 			return MediaTypeRanks[mediaType];
 		}
-    }
+	}
 }

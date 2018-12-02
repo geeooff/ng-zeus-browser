@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using System.Xml;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.FileProviders;
 
 namespace ZeusBrowser.Server.Models
 {
@@ -18,20 +19,20 @@ namespace ZeusBrowser.Server.Models
 	public class Fso
 	{
 		public Fso(
-			FileSystemInfo fsi,
+			IFileInfo fi,
 			string name,
 			Uri uri,
 			MediaType mediaType,
 			DateTime instanceCreated)
 		{
-			FileSystemInfo = fsi;
+			FileInfo = fi;
 			Name = name;
 			Uri = uri;
 			MediaType = mediaType;
 			InstanceCreated = instanceCreated;
 		}
 
-		internal FileSystemInfo FileSystemInfo { get; private set; }
+		internal IFileInfo FileInfo { get; private set; }
 
 		public string Name { get; private set; }
 
@@ -41,19 +42,20 @@ namespace ZeusBrowser.Server.Models
 
 		public MediaType MediaType { get; private set; }
 
-		public bool Exists => FileSystemInfo.Exists;
+		public bool Exists => FileInfo.Exists;
 
-		public bool IsDir => FileSystemInfo is DirectoryInfo;
+		public bool IsDir => FileInfo.IsDirectory;
 
-		public bool IsFile => FileSystemInfo is FileInfo;
+		public bool IsFile => !IsDir;
 
-		public long FileSize => FileSystemInfo is FileInfo fi ? fi.Length : 0L;
+		public long FileSize => IsFile ? FileInfo.Length : 0L;
 
-		public DateTime? Created => Exists ? FileSystemInfo.CreationTime : (DateTime?)null;
+		// Creation date is not exposed by IFileInfo or IFileProvider
+		//public DateTime? Created => Exists ? FileInfo.CreationTime : (DateTime?)null;
 
-		public DateTime? Modified => Exists ? FileSystemInfo.LastWriteTime : (DateTime?)null;
+		public DateTimeOffset? Modified => Exists ? FileInfo.LastModified : (DateTimeOffset?)null;
 
-		public string FileExtension => IsFile ? FileSystemInfo.Extension.TrimStart('.') : null;
+		public string FileExtension => IsFile ? System.IO.Path.GetExtension(FileInfo.Name).TrimStart('.') : null;
 
 		public DateTime InstanceCreated { get; private set; }
 

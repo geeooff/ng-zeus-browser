@@ -24,6 +24,7 @@ namespace ZeusBrowser.Server.Services
 			ILogger<FsoFactoryService> logger,
 			IOptions<AppSettings> optionsAccessor,
 			IFileProvider fileProvider,
+			IRootFileInfo rootFileInfo,
 			IFsoUriService uriService,
 			IFsoMediaTypeFactoryService mediaTypeFactoryService)
 		{
@@ -33,10 +34,9 @@ namespace ZeusBrowser.Server.Services
 			_uriService = uriService;
 			_mediaTypeFactoryService = mediaTypeFactoryService;
 
-			// TODO Replace DirectoryInfo and FileInfo by secured IFileInfo references
 			// root object
 			Root = Create(
-				new DirectoryInfo(_options.PhysicalPath),
+				rootFileInfo,
 				_options.RootName,
 				_uriService.Get("/")
 			);
@@ -58,30 +58,26 @@ namespace ZeusBrowser.Server.Services
 			if (paths.Count == 0)
 				return Root;
 
-			// add root full path before descendants segments
-			paths.Insert(0, Root.FileSystemInfo.FullName);
-
 			string name = paths.Last();
 			string physicalPath = Path.Combine(paths.ToArray());
-			FileSystemInfo fsi = GetFileSystemInfo(physicalPath, name);
-
-			Fso fso = Create(fsi, name, uri);
+			IFileInfo fi = _fileProvider.GetFileInfo(physicalPath);
+			Fso fso = Create(fi, name, uri);
 
 			_logger.ChildCreated(fso);
 
 			return fso;
 		}
 
-		public Fso Create(Fso parent, FileSystemInfo fsi)
+		public Fso Create(Fso parent, IFileInfo fi)
 		{
 			if (parent == null)
 				throw new ArgumentNullException("Child must have a parent", nameof(parent));
 
-			string name = fsi.Name;
+			string name = fi.Name;
 			Uri uri = _uriService.GetChild(parent.Uri, name);
-			string physicalPath = Path.Combine(parent.FileSystemInfo.FullName, name);
+			string physicalPath = Path.Combine(parent.FileInfo.PhysicalPath, name);
 
-			Fso fso = Create(fsi, name, uri);
+			Fso fso = Create(fi, name, uri);
 
 			_logger.ChildCreated(fso);
 
@@ -95,9 +91,11 @@ namespace ZeusBrowser.Server.Services
 
 			if (parent.Exists && parent.IsDir)
 			{
-				return ((DirectoryInfo)parent.FileSystemInfo).EnumerateFileSystemInfos()
-					.Where(fsi => !_options.SkipFolders.Contains(fsi.Name, StringComparer.OrdinalIgnoreCase))
-					.Select(fsi => Create(parent, fsi))
+				string relativePhysicalPath = GetFileProviderRelativePath(Root.FileInfo.PhysicalPath, parent.FileInfo.PhysicalPath);
+
+				return _fileProvider.GetDirectoryContents(relativePhysicalPath)
+					.Where(fi => !_options.SkipFolders.Contains(fi.Name, StringComparer.OrdinalIgnoreCase))
+					.Select(fi => Create(parent, fi))
 					.ToList();
 			}
 			else
@@ -106,44 +104,33 @@ namespace ZeusBrowser.Server.Services
 			}
 		}
 
-		private Fso Create(FileSystemInfo fsi, string name, Uri uri)
+		private Fso Create(IFileInfo fi, string name, Uri uri)
 		{
 			Core.MediaType mediaType = null;
 
-			if (fsi is FileInfo fi)
-			{
-				mediaType = _mediaTypeFactoryService.Create(fi.Extension.TrimStart('.'));
-			}
-			else if (fsi is DirectoryInfo)
+			if (fi.IsDirectory)
 			{
 				uri = _uriService.GetSlashedUri(uri);
 			}
-
-			return new Fso(fsi, name, uri, mediaType, DateTime.Now);
-		}
-
-		private FileSystemInfo GetFileSystemInfo(string physicalPath, string name)
-		{
-			FileAttributes attributes;
-
-			try
-			{
-				attributes = File.GetAttributes(physicalPath);
-			}
-			catch (Exception ex)
-			{
-				_logger.UnknownFileSystemInfo(name, physicalPath, ex);
-				return new UnknownFileSystemInfo(name, physicalPath);
-			}
-
-			if ((attributes & FileAttributes.Directory) == FileAttributes.Directory)
-			{
-				return new DirectoryInfo(physicalPath);
-			}
 			else
 			{
-				return new FileInfo(physicalPath);
+				string extension = Path.GetExtension(fi.Name).TrimStart('.');
+				mediaType = _mediaTypeFactoryService.Create(extension);
 			}
+
+			return new Fso(fi, name, uri, mediaType, DateTime.Now);
+		}
+
+		private string GetFileProviderRelativePath(string parentPath, string childPath)
+		{
+			string relativePhysicalPath = Path.GetRelativePath(parentPath, childPath);
+
+			if (relativePhysicalPath == ".")
+			{
+				relativePhysicalPath = string.Empty;
+			}
+
+			return relativePhysicalPath;
 		}
 	}
 }
