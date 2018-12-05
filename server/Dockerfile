@@ -1,9 +1,9 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-nanoserver-1709 AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 28319
 EXPOSE 44304
 
-FROM microsoft/dotnet:2.1-sdk-nanoserver-1709 AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
 COPY server/server.csproj server/
 RUN dotnet restore server/server.csproj
