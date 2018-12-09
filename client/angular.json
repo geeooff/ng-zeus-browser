@@ -21,10 +21,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              }
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -129,7 +126,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "styleext": "css"
+      "styleext": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"

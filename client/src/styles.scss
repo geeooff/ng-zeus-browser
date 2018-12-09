@@ -1,0 +1,184 @@
+@charset 'UTF-8';
+
+// Bootstrap settings
+$font-size-root:			14px;
+$display1-weight: 			300;
+$display2-weight: 			300;
+$display3-weight: 			300;
+$display4-weight: 			300;
+$headings-font-weight:   	400;
+
+$gray-dark:                 #373a3c;
+$gray:                      #55595c;
+$gray-light:                #818a91;
+$gray-lighter:              #eceeef;
+$gray-lightest:             #f7f7f9;
+
+$brand-primary:             #0275d8;
+$brand-success:             #5cb85c;
+$brand-info:                #5bc0de;
+$brand-warning:             #f0ad4e;
+$brand-danger:              #d9534f;
+$brand-inverse:             $gray-dark;
+
+$font-family-sans-serif: 	"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$enable-flex: 				true;
+$enable-shadows:            true;
+$enable-gradients:          true;
+$enable-transitions:        true;
+$enable-hover-media-query:  true;
+$enable-print-styles: 		false;
+
+$font-size-h1:				4rem;
+$font-size-h2:				3rem;
+$font-size-h3:				2rem;
+$font-size-h4:				1.5rem;
+$font-size-h5:				1.25rem;
+$font-size-h6:				1rem;
+
+$display1-size: 			4rem;
+$display2-size: 			3rem;
+$display3-size: 			2rem;
+$display4-size: 			1.5rem;
+
+$table-cell-padding:		0.5rem;
+$breadcrumb-bg:				$gray-lightest;
+$dt-font-weight:			300;
+
+// Bootstrap
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/code";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/tables";
+//@import "../node_modules/bootstrap/scss/forms";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/transitions";
+@import "../node_modules/bootstrap/scss/dropdown";
+@import "../node_modules/bootstrap/scss/button-group";
+//@import "../node_modules/bootstrap/scss/input-group";
+//@import "../node_modules/bootstrap/scss/custom-forms";
+@import "../node_modules/bootstrap/scss/nav";
+@import "../node_modules/bootstrap/scss/navbar";
+@import "../node_modules/bootstrap/scss/card";
+@import "../node_modules/bootstrap/scss/breadcrumb";
+//@import "../node_modules/bootstrap/scss/pagination";
+@import "../node_modules/bootstrap/scss/badge";
+@import "../node_modules/bootstrap/scss/jumbotron";
+@import "../node_modules/bootstrap/scss/alert";
+//@import "../node_modules/bootstrap/scss/progress";
+@import "../node_modules/bootstrap/scss/media";
+@import "../node_modules/bootstrap/scss/list-group";
+@import "../node_modules/bootstrap/scss/close";
+//@import "../node_modules/bootstrap/scss/modal";
+@import "../node_modules/bootstrap/scss/tooltip";
+//@import "../node_modules/bootstrap/scss/popover";
+//@import "../node_modules/bootstrap/scss/carousel";
+@import "../node_modules/bootstrap/scss/utilities";
+//@import "../node_modules/bootstrap/scss/print";
+
+// My Styles
+#header-toolbar {
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#dir {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	//.col-icon { }
+	//.col-name { }
+	.col-size { white-space: nowrap; text-align: right; }
+	.col-date { white-space: nowrap; text-align: right; }
+	.col-actions { white-space: nowrap; text-align: right; }
+	thead th.col-icon { width: 1%; }
+	//thead th.col-name { }
+	thead th.col-size { width: 1%; }
+	thead th.col-date { width: 1%; }
+	thead th.col-actions { width: 1%; }
+	//tbody td.col-icon { }
+	tbody td.col-name { overflow: hidden; }
+	//tbody td.col-size { }
+	//tbody td.col-date { }
+	//tbody td.col-actions { }
+}
+
+div.mediainfo dd { overflow: hidden; }
+
+.modal {
+	.modal-body {
+		&.modal-body-ajax-updating .modal-body-ajax-updated { display: none; }
+		&.modal-body-ajax-updated .modal-body-ajax-updating { display: none; }
+	}
+}
+
+.embed-responsive {
+	&.embed-responsive-auto {
+		position: inherit;
+		height: inherit;
+		overflow: inherit;
+
+		.embed-responsive-item {
+			display: block;
+			position: inherit;
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+// Text-file preview
+pre.card-block {
+	margin-bottom: 0;
+}
+
+// MadiaInfo tracks
+.mi-track {
+	dl {
+		@include make-row();
+		margin-bottom: 0;
+
+		dt {
+			@include make-col-ready();
+		}
+		dd {
+			@include make-col-ready();
+			margin-bottom: 0.125rem;
+		}
+
+		@include media-breakpoint-up('md') {
+			dt {
+				@include make-col(5);
+				@include text-truncate();
+				text-align: right;
+			}
+			dd {
+				@include make-col(7);
+			}
+		}
+
+		@include media-breakpoint-up('lg') {
+			dt {
+				@include make-col(4);
+			}
+			dd {
+				@include make-col(8);
+			}
+		}
+
+		@include media-breakpoint-up('xl') {
+			dt {
+				@include make-col(3);
+			}
+			dd {
+				@include make-col(9);
+			}
+		}
+	}
+}
