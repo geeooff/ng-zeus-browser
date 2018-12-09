@@ -1,0 +1,21 @@
+<div class="jumbotron">
+	<div class="container">
+		<app-breadcrumb></app-breadcrumb>
+		<h1>TODO item title</h1>
+		<p class="lead">
+			Date : <span ngbTooltip="TODO full date" placement="right" class="value date">TODO relative date</span><br />
+			Taille : <span ngbTooltip="TODO binary prefixed file size" placement="right" class="value filesize">TODO international-system-of-units prefixed file size</span>
+		</p>
+		<div ngbDropdown>
+			<button ngbDropdownToggle id="debugButton" type="button" class="btn btn-sm btn-outline-danger">
+				<fa-icon icon="bug"></fa-icon> Debug
+			</button>
+			<div ngbDropdownMenu aria-labelledby="debugButton">
+				<a class="dropdown-item" href="#">debug action 1</a>
+				<a class="dropdown-item" href="#">debug action 2</a>
+				<a class="dropdown-item" href="#">debug action 3</a>
+				<a class="dropdown-item" href="#">debug action 4</a>
+			</div>
+		</div>
+	</div>
+</div>

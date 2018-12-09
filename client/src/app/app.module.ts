@@ -1,39 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { BrowseModule } from './browse/browse.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    NgbModule.forRoot(),
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      headerName: 'X-Zeus-Lightning',
-      cookieName: 'Zeus-Lightning'
-    }),
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	imports: [
+		AppRoutingModule,
+		BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+		HttpClientModule,
+		HttpClientXsrfModule.withOptions({
+			headerName: 'X-Zeus-Lightning',
+			cookieName: 'Zeus-Lightning'
+		}),
+		SharedModule,
+		CoreModule,
+		BrowseModule
+	],
+	declarations: [
+		AppComponent
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+	constructor(router: Router) {
+		if (!environment.production) {
+			console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+		}
+	}
+}
