@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
-	{ path: '', redirectTo: '/browse', pathMatch: 'full' }
+	{ path: '', redirectTo: '/browse/', pathMatch: 'full' }
 ];
 
 @NgModule({
