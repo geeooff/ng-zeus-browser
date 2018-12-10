@@ -1,0 +1,19 @@
+#dir {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	//.col-icon { }
+	//.col-name { }
+	.col-size { white-space: nowrap; text-align: right; }
+	.col-date { white-space: nowrap; text-align: right; }
+	.col-actions { white-space: nowrap; text-align: right; }
+	thead th.col-icon { width: 1%; }
+	//thead th.col-name { }
+	thead th.col-size { width: 1%; }
+	thead th.col-date { width: 1%; }
+	thead th.col-actions { width: 1%; }
+	//tbody td.col-icon { }
+	tbody td.col-name { overflow: hidden; }
+	//tbody td.col-size { }
+	//tbody td.col-date { }
+	//tbody td.col-actions { }
+}

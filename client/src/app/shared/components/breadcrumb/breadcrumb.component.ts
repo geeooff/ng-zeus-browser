@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Fso } from '../../interfaces/fso';
 
 @Component({
 	selector: 'app-breadcrumb',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
+	@Input() fso: Fso;
+	@Input() ancestors: Fso[];
 
 	constructor() { }
 

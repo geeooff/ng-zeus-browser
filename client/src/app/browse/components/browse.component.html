@@ -1,0 +1,72 @@
+<app-jumbotron [fso]="fso" [ancestors]="ancestors"></app-jumbotron>
+
+<div class="container">
+	<div id="header-toolbar">
+		<div class="btn-toolbar">
+			<div class="btn-group mr-2">
+				<a *ngIf="ancestors?.length; else disabledParent" [routerLink]="['/browse', ancestors[0].path]" class="btn btn-outline-primary" title="{{ ancestors[0].name }}"><fa-icon icon="arrow-up"></fa-icon></a>
+				<ng-template #disabledParent>
+					<a class="btn btn-outline-primary disabled" title="Aucun dossier parent"><fa-icon icon="arrow-up"></fa-icon></a>
+				</ng-template>
+			</div>
+			<div class="btn-group">
+				<a *ngIf="previous; else disabledPrevious" [routerLink]="['/browse', previous.path]" class="btn btn-outline-primary" title="{{ previous.name }}"><fa-icon icon="arrow-left"></fa-icon></a>
+				<ng-template #disabledPrevious>
+					<a class="btn btn-outline-primary disabled" title="Aucun fichier/dossier précédent"><fa-icon icon="arrow-left"></fa-icon></a>
+				</ng-template>
+				<a *ngIf="next; else disabledNext" [routerLink]="['/browse', next.path]" class="btn btn-outline-primary" title="{{ next.name }}"><fa-icon icon="arrow-right"></fa-icon></a>
+				<ng-template #disabledNext>
+					<a class="btn btn-outline-primary disabled" title="Aucun fichier/dossier suivant"><fa-icon icon="arrow-right"></fa-icon></a>
+				</ng-template>
+			</div>
+		</div>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<a href="?urls" type="text/plain" class="btn btn-secondary"><fa-icon icon="list"></fa-icon> <span class="hidden-xs-down">URLs</span></a>
+				<a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="sr-only">Types de fichiers</span>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="?urls" type="text/plain">Tout fichier</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="?urls&amp;mediatype=text" type="text/plain"><fa-icon icon="file-alt" [fixedWidth]="true"></fa-icon> Texte</a>
+					<a class="dropdown-item" href="?urls&amp;mediatype=video" type="text/plain"><fa-icon icon="film" [fixedWidth]="true"></fa-icon> Vidéo</a>
+					<a class="dropdown-item" href="?urls&amp;mediatype=music" type="text/plain"><fa-icon icon="music" [fixedWidth]="true"></fa-icon> Musique</a>
+					<a class="dropdown-item" href="?urls&amp;mediatype=image" type="text/plain"><fa-icon icon="image" [fixedWidth]="true"></fa-icon> Image</a>
+					<a class="dropdown-item" href="?urls&amp;mediatype=subtitles" type="text/plain"><fa-icon icon="font" [fixedWidth]="true"></fa-icon> Sous-titres</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<a href="?m3u" type="application/x-mpegurl" class="btn btn-secondary"><fa-icon icon="play"></fa-icon> <span class="hidden-xs-down">Playlist</span></a>
+				<a class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="sr-only">Types de fichiers</span>
+				</a>
+				<div class="dropdown-menu">
+					<div class="dropdown-header">Format M3U</div>
+					<a class="dropdown-item" href="?m3u" type="application/x-mpegurl">Tout fichier</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="?m3u&amp;mediatype=text" type="text/plain"><fa-icon icon="file-alt" [fixedWidth]="true"></fa-icon> Texte</a>
+					<a class="dropdown-item" href="?m3u&amp;mediatype=video" type="text/plain"><fa-icon icon="film" [fixedWidth]="true"></fa-icon> Vidéo</a>
+					<a class="dropdown-item" href="?m3u&amp;mediatype=music" type="text/plain"><fa-icon icon="music" [fixedWidth]="true"></fa-icon> Musique</a>
+					<a class="dropdown-item" href="?m3u&amp;mediatype=image" type="text/plain"><fa-icon icon="image" [fixedWidth]="true"></fa-icon> Image</a>
+					<a class="dropdown-item" href="?m3u&amp;mediatype=subtitles" type="text/plain"><fa-icon icon="font" [fixedWidth]="true"></fa-icon> Sous-titres</a>
+					<div class="dropdown-divider"></div>
+					<div class="dropdown-header">Format ASX</div>
+					<a class="dropdown-item" href="?asx" type="application/asx">Tout fichier</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="?asx&amp;mediatype=text" type="text/plain"><fa-icon icon="file-alt" [fixedWidth]="true"></fa-icon> Texte</a>
+					<a class="dropdown-item" href="?asx&amp;mediatype=video" type="text/plain"><fa-icon icon="film" [fixedWidth]="true"></fa-icon> Vidéo</a>
+					<a class="dropdown-item" href="?asx&amp;mediatype=music" type="text/plain"><fa-icon icon="music" [fixedWidth]="true"></fa-icon> Musique</a>
+					<a class="dropdown-item" href="?asx&amp;mediatype=image" type="text/plain"><fa-icon icon="image" [fixedWidth]="true"></fa-icon> Image</a>
+					<a class="dropdown-item" href="?asx&amp;mediatype=subtitles" type="text/plain"><fa-icon icon="font" [fixedWidth]="true"></fa-icon> Sous-titres</a>
+				</div>
+			</div>
+		</div>
+		<div class="cart cart-light btn-group">
+			<a href="?addtocart" type="application/json" class="btn btn-outline-success addtocart" role="button"><fa-icon icon="shopping-cart"></fa-icon> <span class="hidden-xs-down">Ajouter</span></a>
+		</div>
+	</div>
+
+	<app-children [children]="children"></app-children>
+
+</div>

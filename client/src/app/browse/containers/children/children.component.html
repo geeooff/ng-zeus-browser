@@ -1,0 +1,18 @@
+<table id="dir" *ngIf="children?.length" class="table table-striped no-footer" role="grid">
+	<thead>
+		<tr role="row">
+			<th class="col-icon"></th>
+			<th class="col-name">Nom</th>
+			<th class="col-size">Taille</th>
+			<th class="col-date">Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let child of children; odd as isOdd; even as isEven" role="row" [class.odd]="isOdd" [class.even]="isEven">
+			<td class="col-icon"></td>
+			<td class="col-name"><a [routerLink]="['/browse', child.path]">{{ child.name }}</a></td>
+			<td class="col-size">{{ child.fileSize }}</td>
+			<td class="col-date">{{ child.modified }}</td>
+		</tr>
+	</tbody>
+</table>

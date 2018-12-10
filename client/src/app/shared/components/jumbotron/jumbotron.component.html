@@ -1,10 +1,10 @@
 <div class="jumbotron">
 	<div class="container">
-		<app-breadcrumb></app-breadcrumb>
-		<h1>TODO item title</h1>
+		<app-breadcrumb [fso]="fso" [ancestors]="ancestors"></app-breadcrumb>
+		<h1>{{ fso.name }}</h1>
 		<p class="lead">
-			Date : <span ngbTooltip="TODO full date" placement="right" class="value date">TODO relative date</span><br />
-			Taille : <span ngbTooltip="TODO binary prefixed file size" placement="right" class="value filesize">TODO international-system-of-units prefixed file size</span>
+			Date : <span ngbTooltip="TODO full date" placement="right" class="value date">{{ fso.modified }}</span><br />
+			Taille : <span ngbTooltip="TODO binary prefixed file size" placement="right" class="value filesize">{{ fso.fileSize }}</span>
 		</p>
 		<div ngbDropdown>
 			<button ngbDropdownToggle id="debugButton" type="button" class="btn btn-sm btn-outline-danger">
