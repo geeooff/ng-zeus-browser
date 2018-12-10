@@ -13,7 +13,21 @@ import {
 // font awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBug } from '@fortawesome/free-solid-svg-icons';
+import {
+	faBug,
+	faArrowUp,
+	faArrowLeft,
+	faArrowRight,
+	faList,
+	faFileAlt,
+	faFilm,
+	faMusic,
+	faImage,
+	faFont,
+	faPlay,
+	faShoppingCart,
+	faFolder
+} from '@fortawesome/free-solid-svg-icons';
 
 // shared components
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
@@ -42,5 +56,17 @@ export class SharedModule {
 	constructor() {
 		// font awesome icon library
 		library.add(faBug);
+		library.add(faArrowUp);
+		library.add(faArrowLeft);
+		library.add(faArrowRight);
+		library.add(faList);
+		library.add(faFileAlt);
+		library.add(faFilm);
+		library.add(faMusic);
+		library.add(faImage);
+		library.add(faFont);
+		library.add(faPlay);
+		library.add(faShoppingCart);
+		library.add(faFolder);
 	}
 }
