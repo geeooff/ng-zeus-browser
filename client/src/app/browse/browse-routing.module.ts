@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowseComponent } from './browse/browse.component';
+import { BrowseComponent } from './components/browse.component';
 import { SingleFsoResolverService } from '../core/services/single-fso-resolver.service';
 
 const appRoutes: Routes = [
 	{
-		path: 'browse/:path',
+		path: 'browse/:fsoPath',
 		component: BrowseComponent,
 		resolve: {
-			fsoResult: SingleFsoResolverService
+			singleFsoResult: SingleFsoResolverService
 		}
 	}
 ];
