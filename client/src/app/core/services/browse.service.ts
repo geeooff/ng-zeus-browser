@@ -20,14 +20,14 @@ export class BrowseService {
 		@Inject('BASE_URL') private baseUrl: string,
 		private http: HttpClient
 	) {
-		baseUrl += 'api/browse';
+		this.baseUrl += 'api/browse';
 	}
 
 	public GetSingle(
 		path: string = this.defaults.path
 	): Observable<SingleResult> {
 		return this.http.get<SingleResult>(
-			`${this.baseUrl}/single/${path}`
+			`${this.baseUrl}/single${path}`
 		);
 	}
 
@@ -37,7 +37,7 @@ export class BrowseService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<SiblingsResult> {
 		return this.http.get<SiblingsResult>(
-			`${this.baseUrl}/siblings/${path}`,
+			`${this.baseUrl}/siblings${path}`,
 			{ params: this.getParams(groupBy, orderBy) }
 		);
 	}
@@ -48,7 +48,7 @@ export class BrowseService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<ChildrenResult> {
 		return this.http.get<ChildrenResult>(
-			`${this.baseUrl}/children/${path}`,
+			`${this.baseUrl}/children${path}`,
 			{ params: this.getParams(groupBy, orderBy) }
 		);
 	}
@@ -59,7 +59,7 @@ export class BrowseService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<DescendantsResult> {
 		return this.http.get<DescendantsResult>(
-			`${this.baseUrl}/descendants/${path}`,
+			`${this.baseUrl}/descendants${path}`,
 			{ params: this.getParams(groupBy, orderBy) }
 		);
 	}

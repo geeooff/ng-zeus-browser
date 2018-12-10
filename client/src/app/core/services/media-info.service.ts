@@ -13,19 +13,19 @@ export class MediaInfoService {
 		@Inject('BASE_URL') private baseUrl: string,
 		private http: HttpClient
 	) {
-		baseUrl += 'api/mediainfo';
+		this.baseUrl += 'api/mediainfo';
 	}
 
 	public GetText(path: string = this.defaults.path): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/text/${path}`,
+			`${this.baseUrl}/text${path}`,
 			{ responseType: 'text' }
 		);
 	}
 
 	public GetXML(path: string = this.defaults.path): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/xml/${path}`,
+			`${this.baseUrl}/xml${path}`,
 			{ responseType: 'text' }
 		);
 	}
@@ -33,14 +33,14 @@ export class MediaInfoService {
 	// TODO strong-type
 	public GetJson(path: string = this.defaults.path): Observable<any> {
 		return this.http.get(
-			`${this.baseUrl}/json/${path}`,
+			`${this.baseUrl}/json${path}`,
 			{ responseType: 'json' }
 		);
 	}
 
 	public GetHtml(path: string = this.defaults.path): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/html/${path}`,
+			`${this.baseUrl}/html${path}`,
 			{ responseType: 'text' }
 		);
 	}

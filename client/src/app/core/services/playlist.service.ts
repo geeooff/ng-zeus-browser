@@ -15,7 +15,7 @@ export class PlaylistService {
 		@Inject('BASE_URL') private baseUrl: string,
 		private http: HttpClient
 	) {
-		baseUrl += 'api/playlist';
+		this.baseUrl += 'api/playlist';
 	}
 
 	public GetM3U(
@@ -24,7 +24,7 @@ export class PlaylistService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/m3u/${path}`,
+			`${this.baseUrl}/m3u${path}`,
 			{
 				responseType: 'text',
 				params: this.getParams(groupBy, orderBy)
@@ -38,7 +38,7 @@ export class PlaylistService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/asx/${path}`,
+			`${this.baseUrl}/asx${path}`,
 			{
 				responseType: 'text',
 				params: this.getParams(groupBy, orderBy)
@@ -52,7 +52,7 @@ export class PlaylistService {
 		orderBy: OrderBy = this.defaults.orderBy,
 	): Observable<string> {
 		return this.http.get(
-			`${this.baseUrl}/urls/${path}`,
+			`${this.baseUrl}/urls${path}`,
 			{
 				responseType: 'text',
 				params: this.getParams(groupBy, orderBy)
